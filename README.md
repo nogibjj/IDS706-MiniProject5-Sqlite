@@ -57,7 +57,7 @@ c.execute("CREATE TABLE GroceryDB ("
 ```python
 c.execute("INSERT INTO GroceryDB VALUES (1427, 'Market', 10, 0.999999, 0.99999, 1.83333, 10.0, '', '')")
 ```
-![img.png](img.png)
+![img.png](img/img.png)
 
 #### Read
 > Full codes in  query.py of `read` function
@@ -65,7 +65,7 @@ c.execute("INSERT INTO GroceryDB VALUES (1427, 'Market', 10, 0.999999, 0.99999, 
 c.execute("SELECT * FROM Grocery")
 print(c.fetchall())
 ```
-![img_1.png](img_1.png)
+![img_1.png](img/img_1.png)
 
 #### Update
 > Full codes in  query.py of `update` function
@@ -73,7 +73,7 @@ print(c.fetchall())
 c.execute("UPDATE GroceryDB SET general_name = 'Updated Name' WHERE id = 1427")
 ```
 
-![img_2.png](img_2.png)
+![img_2.png](img/img_2.png)
 
 #### Delete
 
@@ -82,17 +82,17 @@ c.execute("UPDATE GroceryDB SET general_name = 'Updated Name' WHERE id = 1427")
 c.execute("DELETE FROM GroceryDB WHERE id = 1427")
 ```
 
-![img_3.png](img_3.png)
+![img_3.png](img/img_3.png)
 
 ## query 1
 > list the bottom 5 rows of the GroceryDB table
 
-![img_4.png](img_4.png)
+![img_4.png](img/img_4.png)
 
 ## query 2
 > ingredient food processing score < 0.5 which means less processed
 
-![img_5.png](img_5.png)
+![img_5.png](img/img_5.png)
 
 ## Test
 
