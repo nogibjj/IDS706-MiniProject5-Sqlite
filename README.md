@@ -1,38 +1,105 @@
-## SQLite Lab
+# Python Script interacting with SQL Database
 
-### Lab:
+[![Test Python Versions](https://github.com/nogibjj/IDS706-MiniProject5-Sqlite/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/IDS706-MiniProject5-Sqlite/actions/workflows/cicd.yml)
 
-* Use an AI Assistant, but use a different one then you used from a previous lab (Anthropic's Claud, Bard, Copilot, CodeWhisperer, Colab AI, etc)
-* ETL-Query:  [E] Extract a dataset from URL, [T] Transform, [L] Load into SQLite Database and [Q] Query
-For the ETL-Query lab:
-* [E] Extract a dataset from a URL like Kaggle or data.gov. JSON or CSV formats tend to work well.
-* [T] Transform the data by cleaning, filtering, enriching, etc to get it ready for analysis.
-* [L] Load the transformed data into a SQLite database table using Python's sqlite3 module.
-* [Q] Write and execute SQL queries on the SQLite database to analyze and retrieve insights from the data.
+## Goal
 
-#### Tasks:
+> Duke University IDS 706 Weekly Mini Project 5
 
-* Fork this project and get it to run
-* Make the query more useful and not a giant mess that prints to screen
-* Convert the main.py into a command-line tool that lets you run each step independantly
-* Fork this project and do the same thing for a new dataset you choose
-* Make sure your project passes lint/tests and has a built badge
-* Include an architectural diagram showing how the project works
+This project mainly is:
+- Connect to a SQL database
+- Perform CRUD operations
+- Write at least two different SQL queries
 
-#### Reflection Questions
+In addition, I make use of Grocery dataset to do the CRUD operations.
+To realise all requirements, I add an additional row with index 1427.
 
-* What challenges did you face when extracting, transforming, and loading the data? How did you overcome them?
-* What insights or new knowledge did you gain from querying the SQLite database?
-* How can SQLite and SQL help make data analysis more efficient? What are the limitations?
-* What AI assistant did you use and how did it compare to others you've tried? What are its strengths and weaknesses?
-* If you could enhance this lab, what would you add or change? What other data would be interesting to load and query?
+## Preparation
 
-##### Challenge Exercises
+1. make sure a data.csv file is in the same directory as main.py
+2. Python 3 or above
+3. Grocery DB extracted by `extract.py`
+4. tabulate is used to format the output
 
-* Add more transformations to the data before loading it into SQLite. Ideas: join with another dataset, aggregate by categories, normalize columns.
-* Write a query to find correlated fields in the data. Print the query results nicely formatted.
-* Create a second table in the SQLite database and write a join query with the two tables.
-* Build a simple Flask web app that runs queries on demand and displays results.
-* Containerize the application using Docker so the database and queries can be portable
+## Run and Result
 
+### Run
+use
+`python main.py`
 
+Upon running the script, it will create database and do the CRUD operations as well as 2 query.
+
+### Result
+
+#### Connection
+
+```python
+conn = sqlite3.connect('GroceryDB.db')
+c = conn.cursor()
+```
+
+#### Create and Insert
+> In transform_load.py
+```python
+c.execute("DROP TABLE IF EXISTS GroceryDB")
+c.execute("CREATE TABLE GroceryDB ("
+              "id INTEGER PRIMARY KEY ,"
+              "general_name, "
+              "count_products, "
+              "ingred_FPro, "
+              "avg_FPro_products, "
+              "avg_distance_root, "
+              "ingred_normalization_term, "
+              "semantic_tree_name, "
+              "semantic_tree_node)")
+```
+
+```python
+c.execute("INSERT INTO GroceryDB VALUES (1427, 'Market', 10, 0.999999, 0.99999, 1.83333, 10.0, '', '')")
+```
+![img.png](img.png)
+
+#### Read
+> Full codes in  query.py of `read` function
+```python
+c.execute("SELECT * FROM Grocery")
+print(c.fetchall())
+```
+![img_1.png](img_1.png)
+
+#### Update
+> Full codes in  query.py of `update` function
+```python
+c.execute("UPDATE GroceryDB SET general_name = 'Updated Name' WHERE id = 1427")
+```
+
+![img_2.png](img_2.png)
+
+#### Delete
+
+> Full codes in  query.py of `delete` function
+```python
+c.execute("DELETE FROM GroceryDB WHERE id = 1427")
+```
+
+![img_3.png](img_3.png)
+
+## query 1
+> list the bottom 5 rows of the GroceryDB table
+
+![img_4.png](img_4.png)
+
+## query 2
+> ingredient food processing score < 0.5 which means less processed
+
+![img_5.png](img_5.png)
+
+## Test
+
+use 
+`make test` or `python test_main.py` to test the script
+
+## Reference
+
+1. https://github.com/nogibjj/sqlite-lab
+2. https://github.com/Barabasi-Lab/GroceryDB
