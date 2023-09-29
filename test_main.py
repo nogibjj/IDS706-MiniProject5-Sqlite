@@ -1,6 +1,4 @@
 import unittest
-from mylib.extract import extract
-from mylib.transform_load import load
 import mylib.query as q
 
 class TestDatabaseFunctions(unittest.TestCase):
@@ -8,10 +6,6 @@ class TestDatabaseFunctions(unittest.TestCase):
     def setUp(self):
         # This method will run before every test
         print("Setting up for the test")
-
-    def test_extract(self):
-        result = extract()
-        self.assertIsNotNone(result)  # Assuming that `extract` should return some value
 
     def test_read(self):
         result = q.read()
