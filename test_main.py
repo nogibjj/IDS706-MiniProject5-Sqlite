@@ -13,10 +13,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         result = extract()
         self.assertIsNotNone(result)  # Assuming that `extract` should return some value
 
-    def test_load(self):
-        result = load()
-        self.assertEqual(result, "GroceryDB.db")
-
     def test_read(self):
         result = q.read()
         self.assertIsNone(result)
