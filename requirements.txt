@@ -9,5 +9,5 @@ ruff==0.0.284
 
 #database
 tabulate
-sqlite3=3.37.0
+sqlite3==3.37.0
 csv
