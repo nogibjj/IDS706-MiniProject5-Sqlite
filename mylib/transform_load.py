@@ -1,7 +1,15 @@
 """
 Transforms and Loads data into the local SQLite3 database
 Example:
-,general name,count_products,ingred_FPro,avg_FPro_products,avg_distance_root,ingred_normalization_term,semantic_tree_name,semantic_tree_node
+,
+general name,
+count_products,
+ingred_FPro,
+avg_FPro_products,
+avg_distance_root,
+ingred_normalization_term,
+semantic_tree_name,
+semantic_tree_node
 """
 import sqlite3
 import csv
@@ -31,7 +39,8 @@ def load(dataset="data/GroceryDB_IgFPro.csv"):
     #insert
     c.executemany("INSERT INTO GroceryDB VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)", payload)
     # extra row for testing
-    c.execute("INSERT INTO GroceryDB VALUES (1427, 'Test Name', 10, 0.999999, 0.99999, 1.83333, 10.0, '', '')")
+    c.execute("INSERT INTO GroceryDB VALUES "
+              "(1427, 'Test Name', 10, 0.999999, 0.99999, 1.83333, 10.0, '', '')")
     conn.commit()
     conn.close()
     return "GroceryDB.db"
