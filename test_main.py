@@ -9,10 +9,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         # This method will run before every test
         print("Setting up for the test")
 
-    def tearDown(self):
-        # This method will run after every test
-        print("Tearing down after the test")
-
     def test_extract(self):
         result = extract()
         self.assertIsNotNone(result)  # Assuming that `extract` should return some value
@@ -23,11 +19,13 @@ class TestDatabaseFunctions(unittest.TestCase):
 
     def test_read(self):
         result = q.read()
-        self.assertIsNone(result)  # Assuming `read` returns None and only prints to console
+        self.assertIsNone(result)
+        # Assuming `read` returns None and only prints to console
 
     def test_query1(self):
         result = q.query1()
-        self.assertIsNone(result)  # Assuming `query1` returns None and only prints to console
+        self.assertIsNone(result)
+        # Assuming `query1` returns None and only prints to console
 
     def test_update(self):
         q.update()
@@ -40,7 +38,8 @@ class TestDatabaseFunctions(unittest.TestCase):
 
     def test_query2(self):
         result = q.query2()
-        self.assertIsNone(result)  # Assuming `query2` returns None and only prints to console
+        self.assertIsNone(result)
+        # Assuming `query2` returns None and only prints to console
 
 
 if __name__ == '__main__':
